@@ -10,7 +10,9 @@ with open("api_key.txt", "r") as f:
 def rename(phrase):
     if phrase == "shotgun":
         phrase = "cookie shotgun"
-    
+    if phrase == "bersek":
+        phrase = "berserk"
+
     lst = phrase.split(" ")
 
     fixed = []
@@ -34,7 +36,7 @@ def skills(player):
     info = data["player"]["stats"]["Arena"]
 
     keys = ["offensive", "utility", "support", "ultimate"]
-    
+
     setup = []
     for k in keys:
         setup.append(rename(info[k].replace("_", " ")))
