@@ -31,15 +31,18 @@ def skills(player):
             .format(key, player)).json()
 
     if data["player"] is None:
-        return [None] * 4
+        return ["Invalid Player"] * 4
 
     info = data["player"]["stats"]["Arena"]
 
     keys = ["offensive", "utility", "support", "ultimate"]
 
-    setup = []
-    for k in keys:
-        setup.append(rename(info[k].replace("_", " ")))
+    try:
+        setup = []
+        for k in keys:
+            setup.append(rename(info[k].replace("_", " ")))
+    except:
+        return ["No data"] * 4
 
     return setup
 
@@ -53,8 +56,10 @@ while True:
     setup = skills(player)
 
     print()
-    if setup[0] is None:
+    if setup[0] == "Invalid Player":
         print("Invalid player")
+    elif setup[0] == "No data":
+        print("No data")
     else:
         print("{}: {}, {}, {}, {}".format(player, setup[0], setup[1], setup[2], setup[3]))
     print()
